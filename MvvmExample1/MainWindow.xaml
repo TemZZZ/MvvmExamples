@@ -1,0 +1,29 @@
+﻿<Window x:Class="MvvmExample1.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:mvvmExample1="clr-namespace:MvvmExample1"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="200" Width="200">
+    <Window.DataContext>
+        <mvvmExample1:MainViewModel/>
+    </Window.DataContext>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <TextBlock Name="firstNumberTextBlock" Grid.Row="0" Grid.Column="0" Text="Первое число:" VerticalAlignment="Center"/>
+        <TextBlock Name="secondNumberTextBlock" Grid.Row="1" Grid.Column="0" Text="Второе число:" VerticalAlignment="Center"/>
+        <TextBlock Name="sumTextBlock" Grid.Row="2" Grid.Column="0" Text="Сумма:" VerticalAlignment="Center"/>
+        <TextBox Name="firstNumberTextBox" Text="{Binding FirstNumber, UpdateSourceTrigger=PropertyChanged}" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center"/>
+        <TextBox Name="secondNumberTextBox" Text="{Binding SecondNumber, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center"/>
+        <TextBox Name="sumTextBox" Text="{Binding Sum, Mode=OneWay}" IsReadOnly="True" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center"/>
+    </Grid>
+</Window>

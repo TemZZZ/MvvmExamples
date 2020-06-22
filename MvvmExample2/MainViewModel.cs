@@ -38,7 +38,7 @@ namespace MvvmExample2
             get
             {
                 return _addNumberCommand
-                       ?? (_addNumberCommand = new RelayCommand(AddNumber));
+                    ?? (_addNumberCommand = new RelayCommand(AddNumber));
             }
         }
 
@@ -47,8 +47,8 @@ namespace MvvmExample2
             get
             {
                 return _removeNumberCommand
-                       ?? (_removeNumberCommand
-                           = new RelayCommand(RemoveNumber));
+                    ?? (_removeNumberCommand = new RelayCommand(
+                        RemoveNumber, obj => Numbers.Count > 0));
             }
         }
 

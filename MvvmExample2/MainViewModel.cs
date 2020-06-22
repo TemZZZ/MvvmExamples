@@ -1,61 +1,67 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
-using MvvmExample2.Annotations;
+﻿using System.Collections.ObjectModel;
 
 
 namespace MvvmExample2
 {
 	public class MainViewModel : Notifier
-	{
-		private readonly Summator _summator;
+    {
+        private readonly Summator _summator;
 
-		private readonly ICommand _removeNumber;
+        private RelayCommand _addNumberCommand;
+        private RelayCommand _removeNumberCommand;
 
-		private int _selectedNumberIndex;
 		private int _newNumber;
+        private int _selectedIndex;
 
-		public MainViewModel()
-		{
-			_summator = new Summator();
-			Numbers = new ObservableCollection<int>(_summator.Numbers);
-			AddNumber = new AddNumberCommand(this);
-		}
+        public MainViewModel()
+        {
+            _summator = new Summator();
+        }
 
-		public Summator GetSummator()
-		{
-			return _summator;
-		}
+        public ObservableCollection<int> Numbers => _summator.Numbers;
 
-		public ICommand AddNumber { get; }
-
-		public ObservableCollection<int> Numbers { get; }
-
-		public int Sum => _summator.GetSum();
-
-		public int SelectedNumberIndex
-		{
-			set
-			{
-				_selectedNumberIndex = value;
-				OnPropertyChanged(nameof(SelectedNumberIndex));
-			}
-		}
+        public int Sum => _summator.GetSum();
 
 		public int NewNumber
-		{
-			get => _newNumber;
-			set
-			{
-				_newNumber = value;
-				OnPropertyChanged(nameof(NewNumber));
-			}
-		}
+        {
+            get => _newNumber;
+			set => _newNumber = value;
+        }
+
+        public int SelectedIndex
+        {
+            set => _selectedIndex = value;
+        }
+
+        public RelayCommand AddNumberCommand
+        {
+            get
+            {
+                return _addNumberCommand
+                       ?? (_addNumberCommand = new RelayCommand(AddNumber));
+            }
+        }
+
+        public RelayCommand RemoveNumberCommand
+        {
+            get
+            {
+                return _removeNumberCommand
+                       ?? (_removeNumberCommand
+                           = new RelayCommand(RemoveNumber));
+            }
+        }
+
+        private void AddNumber(object parameter)
+        {
+            _summator.AddNumber(_newNumber);
+            OnPropertyChanged(nameof(Sum));
+        }
+
+        private void RemoveNumber(object parameter)
+        {
+            _summator.RemoveNumber(_selectedIndex);
+            OnPropertyChanged(nameof(Sum));
+        }
 	}
 }

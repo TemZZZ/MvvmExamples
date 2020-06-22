@@ -20,11 +20,11 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <TextBox Name="newNumberTextBox" Text="{Binding NewNumber, UpdateSourceTrigger=PropertyChanged}" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center"/>
-        <Button Name="addNumberButton" Command="{Binding AddNumber}" Grid.Row="0" Grid.Column="1" Content="Add Number" VerticalAlignment="Center"/>
-        <ListBox Name="allNumbersListBox" DataContext="{Binding Numbers, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" Grid.Row="1" Grid.ColumnSpan="2" SelectionMode="Single"/>
-        <Button Name="removeNumberButton" Grid.Row="2" Grid.ColumnSpan="2" Content="Remove Number" VerticalAlignment="Center"/>
+        <TextBox Name="newNumberTextBox" Text="{Binding NewNumber}" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center"/>
+        <Button Name="addNumberButton" Command="{Binding AddNumberCommand}" Grid.Row="0" Grid.Column="1" Content="Add Number" VerticalAlignment="Center"/>
+        <ListBox Name="allNumbersListBox" ItemsSource="{Binding Numbers}" SelectedIndex="{Binding SelectedIndex}" Grid.Row="1" Grid.ColumnSpan="2" SelectionMode="Single"/>
+        <Button Name="removeNumberButton" Command="{Binding RemoveNumberCommand}" Grid.Row="2" Grid.ColumnSpan="2" Content="Remove Number" VerticalAlignment="Center"/>
         <TextBlock Grid.Row="3" Grid.Column="0" Text="Sum of All Numbers:" VerticalAlignment="Center"/>
-        <TextBox Name="sumTextBox" Text="{Binding Sum, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" Grid.Row="3" Grid.Column="1" VerticalAlignment="Center" IsReadOnly="True"/>
+        <TextBox Name="sumTextBox" Text="{Binding Sum, Mode=OneWay}" Grid.Row="3" Grid.Column="1" VerticalAlignment="Center" IsReadOnly="True"/>
     </Grid>
 </Window>

@@ -1,14 +1,23 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 
 
 namespace MvvmExample2
 {
 	public class Summator
-	{
-		public List<int> Numbers { get; } = new List<int>();
+    {
+        public Summator()
+        {
+            Numbers = new ObservableCollection<int>
+            {
+				1, 2, 3, 4, 5, 6, 7, 8, 9, 0
+            };
+        }
 
-		public void AddNumber(int number)
+        public ObservableCollection<int> Numbers { get; }
+
+        public void AddNumber(int number)
 		{
 			Numbers.Add(number);
 		}
